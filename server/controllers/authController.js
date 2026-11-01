@@ -4,7 +4,14 @@ import User from '../models/User.js';
 
 const login = async (req, res) => {
     try {
-        const {email, password} = req.body;
+        const email = typeof req.body.email === 'string'
+            ? req.body.email.trim().toLowerCase()
+            : '';
+        const { password } = req.body;
+
+        if (!email || typeof password !== 'string') {
+            return res.status(400).json({ success: false, message: 'Email and password are required' });
+        }
         
         const user = await User.findOne({email});
         if (!user) {
@@ -19,6 +26,7 @@ const login = async (req, res) => {
 
         return res.status(200).json({ success: true, message: "login successful", token, user: {id: user._id, name: user.name, email: user.email, role: user.role }});
     } catch (error) {
+        console.error('Login failed:', error.message);
         return res.status(500).json({success: false, message: "Internal server error"});
     }
 }
