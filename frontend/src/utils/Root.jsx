@@ -9,7 +9,7 @@ const Root = () => {
     }
 
     if (user.role === "admin") {
-        return <Navigate to="/admin/dashboard" replace />;
+        return <Navigate to="/admin-dashboard" replace />;
     }
 
     if (user.role === "employee") {
