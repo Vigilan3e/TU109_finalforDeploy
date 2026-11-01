@@ -15,10 +15,10 @@ import dashboardRouter from './routes/dashboard.js'
 const app = express();
 app.use(cors({
     origin: [
-        'https://pigvillain.com',
-        'https://www.pigvillain.com',
         'http://localhost:5173',
-        'http://localhost:3000'
+        'https://tu-109-finalfor-deploy.vercel.app',
+        'https://pigvillain.com',
+        'https://www.pigvillain.com'
     ],
     credentials: true
 }));
