@@ -1,27 +1,22 @@
-import { useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router";
+import { Navigate } from "react-router";
 
-const Root= () => {
+const Root = () => {
     const { user } = useAuth();
-    const navigate = useNavigate();
 
-    useEffect(() => {
-        if(user) {
-            if (user.role === "admin"){
-                navigate("/admin/dashboard");
-            } else if (user.role === "employee") {
-                navigate("/employee/dashboard");
-            } else {
-                navigate("/login");
-            }
+    if (!user) {
+        return <Navigate to="/login" replace />;
+    }
 
-            } else {
-                navigate("/login");
-        }
-    }, [user, navigate])
+    if (user.role === "admin") {
+        return <Navigate to="/admin/dashboard" replace />;
+    }
 
-    return null;
-}
+    if (user.role === "employee") {
+        return <Navigate to="/employee/dashboard" replace />;
+    }
+
+    return <Navigate to="/login" replace />;
+};
 
 export default Root;
