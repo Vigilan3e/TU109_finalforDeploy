@@ -58,7 +58,7 @@ const Login = () => {
 
     return (
         <div className="flex flex-col items-center h-screen justify-center bg-gradient-to-b from-red-700 from-50% to-gray-100 to-50% space-y-6">
-            <h1 className="text-3xl text-white font-serif">PigVillain Inventory Management System version 0.0.1</h1>
+            <h1 className="text-3xl text-white font-serif">PigVillain Inventory Management System version 0.0.2</h1>
             <div className="border shadow-lg p-6 w-80 bg-white">
                 <h2 className="text-2xl font-bold mb-4">Login</h2>
                 {error && (
