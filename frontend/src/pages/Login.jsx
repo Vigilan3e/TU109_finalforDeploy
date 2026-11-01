@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router";
 import api from '../utils/api';
@@ -19,12 +19,17 @@ const Login = () => {
         setError(null);
 
         try {
+            console.info('[login] Sending request', `${api.defaults.baseURL}/api/auth/login`);
             const response = await api.post("/api/auth/login", {
                 email,
                  password,
                 }
             );
-            console.log(response.data);
+            console.info('[login] Response', {
+                status: response.status,
+                success: response.data.success,
+                message: response.data.message
+            });
 
             if  (response.data.success) {
                 await login(response.data.user, response.data.token);
@@ -38,9 +43,14 @@ const Login = () => {
             }
 
         } catch (error) {
-            if(error.response) {
-                setError(error.response.data.message);
-            }
+            const status = error.response?.status;
+            const responseData = error.response?.data;
+            console.error('[login] Request failed', {
+                status,
+                response: responseData,
+                message: error.message
+            });
+            setError(responseData?.message || 'Unable to reach the login server');
         } finally {
             setLoading(false);
         }
