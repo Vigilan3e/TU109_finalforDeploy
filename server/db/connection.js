@@ -9,7 +9,8 @@ const connectDB = async () => {
     }
 
     try {
-        await mongoose.connect(mongoUri);
+        const databaseName = process.env.MONGO_DB_NAME || 'pos-db';
+        await mongoose.connect(mongoUri, { dbName: databaseName });
         console.log(`MongoDB connected successfully to database: ${mongoose.connection.name}`);
     } catch (error) {
         console.error('MongoDB connection failed:', error.message);
