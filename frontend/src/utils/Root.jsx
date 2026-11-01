@@ -3,7 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router";
 
 const Root= () => {
-    const { user } = useAuth0();
+    const { user } = useAuth();
     const navigate = useNavigate();
 
     useEffect(() => {
